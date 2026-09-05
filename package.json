@@ -6,15 +6,17 @@
   "type": "module",
   "scripts": {
     "draw": "tsx scripts/draw.ts",
+    "build:site": "tsx scripts/build-site.ts",
     "test:assign": "tsx scripts/test-assign.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "resend": "^4.0.1",
+    "nodemailer": "^10.0.0",
     "zod": "^3.24.1"
   },
   "devDependencies": {
     "@types/node": "^22.10.5",
+    "@types/nodemailer": "^8.0.1",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3"
   }

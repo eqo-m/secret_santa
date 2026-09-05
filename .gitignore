@@ -2,6 +2,9 @@ node_modules/
 dist/
 .env
 
-# Generated static reveal pages — rebuilt by `npm run draw`, not source of truth.
-# Deploy the contents of site/ to static hosting as a separate manual step.
-site/*.html
+# Generated site output — rebuilt by `npm run draw` / `npm run build:site`,
+# never source of truth. Deployed to GitHub Pages by a CI workflow that
+# builds it fresh, so it must never be committed (filenames carry the
+# unguessable reveal tokens — see CLAUDE.md).
+site/*
+!site/.gitkeep

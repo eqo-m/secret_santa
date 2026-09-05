@@ -11,7 +11,8 @@ maintain, no admin UI. A local script + static files is the target.
 - **Runtime:** Node.js + TypeScript, run locally/once a year via a script
 - **Persistence:** flat JSON files, committed to the repo — this *is*
   the "database" and doubles as the history log
-- **Email:** Resend (or Nodemailer), called directly from the script
+- **Email:** Nodemailer via Gmail (app password), called directly from
+  the script
 - **Reveal pages:** static HTML, generated at draw time, deployed to any
   static host (GitHub Pages, Netlify, Vercel static — free tier, no
   server code running)
@@ -80,14 +81,19 @@ secret-santa/
 │   ├── people.json          # hand-edited: names, households, wishlist links
 │   └── history.json         # append-only, one entry per year, written by draw.ts
 ├── scripts/
-│   └── draw.ts              # run once/year: generates assignments, updates
-│                             # history.json, builds static reveal pages, sends emails
+│   ├── draw.ts              # run once/year: generates assignments, updates
+│   │                         # history.json, builds static reveal pages, sends emails
+│   └── build-site.ts        # rebuilds site/ from data/ only — no draw, no
+│                             # email, safe to re-run (used by CI)
 ├── lib/
 │   ├── assign.ts            # unchanged from before
-│   └── email.ts             # sends each person their reveal link via Resend
+│   ├── site.ts              # shared reveal-page generation (draw.ts + build-site.ts)
+│   └── email.ts             # sends each person their reveal link via Gmail (nodemailer)
 ├── site/
 │   └── reveal-{token}.html  # generated output, one static file per person
-├── .env                     # RESEND_API_KEY only
+├── .github/workflows/
+│   └── deploy-pages.yml     # rebuilds site/ and deploys to GitHub Pages on push
+├── .env                     # GMAIL_USER + GMAIL_APP_PASSWORD only
 └── package.json
 ```
 
@@ -95,8 +101,16 @@ Everything happens in one command (`npm run draw` or similar): read
 `people.json` + `history.json` → run `generateAssignments` → append the
 result to `history.json` → generate one static HTML file per person into
 `site/` → email each person their `reveal-{token}.html` link → done.
-Deploying `site/` to static hosting is a separate, manual step (or a
-follow-up script) — doesn't need to be automatic.
+
+`site/` is gitignored, not committed — its filenames carry the
+unguessable reveal tokens, and this repo is public, so committing them
+would make every reveal link discoverable in the repo's file tree.
+Deploying is instead a GitHub Actions workflow
+(`.github/workflows/deploy-pages.yml`) that rebuilds `site/` from
+`data/` on every push and publishes it straight to GitHub Pages as a
+deployment artifact — the HTML never touches git history. Triggering
+that deploy still requires a manual `git push` after running the draw;
+only the actual publish step is automated.
 
 ## Reveal page UX
 
@@ -201,19 +215,20 @@ function shuffle<T>(arr: T[]): T[] {
 - Working on Linux — Claude Desktop's Linux beta covers Debian/Ubuntu
   officially; if on another distro, the CLI (`claude` command) works
   identically and is the fallback.
-- Keep dependencies minimal: this should need little beyond `resend` (or
-  `nodemailer`) and TypeScript tooling — no framework, no DB client, no
-  ORM. Push back (ask first) if a dependency starts pulling in a server
-  or DB.
+- Keep dependencies minimal: this should need little beyond `nodemailer`
+  and TypeScript tooling — no framework, no DB client, no ORM. Push back
+  (ask first) if a dependency starts pulling in a server or DB.
 - Commit incrementally: scaffold → assign logic → draw script → reveal
   page generation → email sending → polish. Don't squash into one commit.
 - After wiring up `assign.ts`, write a quick script/test that runs
   `generateAssignments` many times over varied household sizes and
   asserts constraints hold (no self, no household, no last-year repeat)
   — this is a good sanity check before trusting it with real data.
-- `.env` will need only `RESEND_API_KEY`. Don't invent a placeholder
-  that looks like a real key — use an obvious placeholder and tell the
-  user where to get a real one.
+- `.env` will need `GMAIL_USER` and `GMAIL_APP_PASSWORD` (a 16-character
+  Gmail app password, not the account login password — requires 2FA,
+  generated at https://myaccount.google.com/apppasswords). Don't invent
+  a placeholder that looks like a real one — use an obvious placeholder
+  and tell the user where to get a real one.
 - `data/people.json` and `data/history.json` should be treated as the
   source of truth — no migrations, no schema versioning needed, just
   keep the shape consistent and validate it lightly (e.g. with zod) if

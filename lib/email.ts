@@ -1,39 +1,48 @@
-// Sends each giver their reveal link via Resend. Called once per person from
-// scripts/draw.ts — no queue, no retries beyond what's written here, this
-// runs once a year for ~11 people.
+// Sends reveal links via Gmail (nodemailer). Called from scripts/draw.ts —
+// no queue, no retries beyond what's written here, this runs once a year
+// for ~11 people.
+//
+// GMAIL_USER must have 2FA enabled and GMAIL_APP_PASSWORD must be a
+// 16-character app password (not the account login password) —
+// generate one at https://myaccount.google.com/apppasswords
 
-import { Resend } from 'resend'
+import nodemailer from 'nodemailer'
 
-export async function sendRevealEmail({
-  apiKey,
-  fromAddress,
-  toEmail,
-  toName,
-  revealUrl,
+export function createEmailSender({
+  gmailUser,
+  gmailAppPassword,
 }: {
-  apiKey: string
-  fromAddress: string
-  toEmail: string
-  toName: string
-  revealUrl: string
-}): Promise<void> {
-  const resend = new Resend(apiKey)
-
-  const { error } = await resend.emails.send({
-    from: fromAddress,
-    to: toEmail,
-    subject: '🎁 Your Secret Santa assignment',
-    html: `
-      <p>Hi ${escapeHtml(toName)},</p>
-      <p>Your Secret Santa assignment is ready.</p>
-      <p><a href="${escapeHtml(revealUrl)}">Click here to see who you're buying for</a></p>
-      <p>Happy gifting!</p>
-    `,
-    text: `Hi ${toName},\n\nYour Secret Santa assignment is ready: ${revealUrl}\n\nHappy gifting!`,
+  gmailUser: string
+  gmailAppPassword: string
+}) {
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: gmailUser,
+      pass: gmailAppPassword,
+    },
   })
 
-  if (error) {
-    throw new Error(`Failed to email ${toEmail}: ${error.message}`)
+  return async function sendRevealEmail({
+    toEmail,
+    toName,
+    revealUrl,
+  }: {
+    toEmail: string
+    toName: string
+    revealUrl: string
+  }): Promise<void> {
+    await transporter.sendMail({
+      from: gmailUser,
+      to: toEmail,
+      subject: `Your Secret Santa assignment is ready, ${toName}!`,
+      html: `
+        <p>Ho ho ho, ${escapeHtml(toName)} —</p>
+        <p><a href="${escapeHtml(revealUrl)}">Click here to see who you're buying for</a>.</p>
+        <p>Happy gifting!</p>
+      `,
+      text: `Ho ho ho, ${toName} — your Secret Santa assignment is ready: ${revealUrl}\n\nHappy gifting!`,
+    })
   }
 }
 
