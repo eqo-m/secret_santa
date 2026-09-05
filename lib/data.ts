@@ -4,7 +4,17 @@
 
 import { readFile } from 'node:fs/promises'
 
-import { PeopleFileSchema, HistoryFileSchema, type Person, type HistoryEntry, type HistoryFile } from './schema.ts'
+import { existsSync } from 'node:fs'
+
+import {
+  PeopleFileSchema,
+  HistoryFileSchema,
+  EmailsFileSchema,
+  type Person,
+  type HistoryEntry,
+  type HistoryFile,
+  type EmailsFile,
+} from './schema.ts'
 import type { PastAssignment } from './assign.ts'
 
 export async function loadPeople(peoplePath: string): Promise<Person[]> {
@@ -44,4 +54,24 @@ export function latestYear(history: HistoryFile): number | undefined {
   return years.length > 0 ? Math.max(...years) : undefined
 }
 
-export type { HistoryEntry, Person }
+/**
+ * Loads data/emails.json (id -> email), gitignored and local-only — see
+ * schema.ts. Only scripts/draw.ts's email-sending step needs this; the CI
+ * site build never calls it.
+ */
+export async function loadEmails(emailsPath: string): Promise<EmailsFile> {
+  if (!existsSync(emailsPath)) {
+    throw new Error(
+      `${emailsPath} not found. Copy data/emails.example.json to data/emails.json and fill in real ` +
+        `addresses (it's gitignored — never committed), or run with --dry-run to skip emailing.`
+    )
+  }
+  const raw = JSON.parse(await readFile(emailsPath, 'utf-8'))
+  const result = EmailsFileSchema.safeParse(raw)
+  if (!result.success) {
+    throw new Error(`${emailsPath} is invalid:\n${result.error.message}`)
+  }
+  return result.data
+}
+
+export type { HistoryEntry, Person, EmailsFile }

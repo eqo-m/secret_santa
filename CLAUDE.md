@@ -42,20 +42,37 @@ to dead ends given household constraints.
 
 ## Data model (JSON files, not a DB)
 
+The GitHub repo is **public**. `data/people.json` and `data/history.json`
+are committed as usual, but `email` is deliberately kept out of both —
+it's the one field the household considers actually sensitive to have
+public. Reveal tokens, names, and household structure being technically
+public is an accepted, explicit tradeoff (low value to outsiders, nobody
+in the family is going to dig through GitHub) — email addresses were the
+one line the household wanted held back.
+
 `data/people.json`:
 ```json
 [
   {
     "id": "alice",
     "name": "Alice",
-    "email": "alice@example.com",
     "householdId": "household-1",
+    "photoFile": "alice.jpg",
     "wishlistUrl": "https://..."
   }
 ]
 ```
 IDs can be simple slugs (`alice`, not a UUID) since this is hand-edited,
 not machine-generated.
+
+`data/emails.json` — id → email, **gitignored, local-only, never
+committed**. Copy `data/emails.example.json` to create it:
+```json
+{ "alice": "alice@example.com" }
+```
+Only `scripts/draw.ts`'s email-sending step reads this file; the CI job
+that builds and publishes `site/` never touches it (see `lib/site.ts`),
+so the Pages build has no need for it to exist anywhere but your machine.
 
 `data/history.json` — one entry per year, appended to on every draw, never
 overwritten:
@@ -71,15 +88,19 @@ overwritten:
 ```
 `revealToken` should be a random unguessable string (e.g. `crypto.randomUUID()`),
 used only to build the reveal page filename/URL — no auth beyond obscurity,
-which is fine for this use case.
+which is fine for this use case. Since this file is committed and the repo
+is public, tokens are technically discoverable by anyone who reads
+`history.json` directly — accepted per the note above.
 
 ## Project structure
 
 ```
 secret-santa/
 ├── data/
-│   ├── people.json          # hand-edited: names, households, wishlist links
-│   └── history.json         # append-only, one entry per year, written by draw.ts
+│   ├── people.json          # hand-edited: names, households, wishlist links — committed
+│   ├── history.json         # append-only, one entry per year, written by draw.ts — committed
+│   ├── emails.example.json  # shape reference for emails.json — committed
+│   └── emails.json          # id -> email — gitignored, local-only, never committed
 ├── scripts/
 │   ├── draw.ts              # run once/year: generates assignments, updates
 │   │                         # history.json, builds static reveal pages, sends emails
@@ -102,13 +123,12 @@ Everything happens in one command (`npm run draw` or similar): read
 result to `history.json` → generate one static HTML file per person into
 `site/` → email each person their `reveal-{token}.html` link → done.
 
-`site/` is gitignored, not committed — its filenames carry the
-unguessable reveal tokens, and this repo is public, so committing them
-would make every reveal link discoverable in the repo's file tree.
-Deploying is instead a GitHub Actions workflow
-(`.github/workflows/deploy-pages.yml`) that rebuilds `site/` from
-`data/` on every push and publishes it straight to GitHub Pages as a
-deployment artifact — the HTML never touches git history. Triggering
+`site/` is gitignored, not committed — it's pure build output, regenerable
+from `data/` + `photos/` at any time (that's what `scripts/build-site.ts`
+does, with no side effects). Deploying is a GitHub Actions workflow
+(`.github/workflows/deploy-pages.yml`) that rebuilds `site/` on every push
+and publishes it straight to GitHub Pages as a deployment artifact, so the
+generated HTML never has to be committed just to get it hosted. Triggering
 that deploy still requires a manual `git push` after running the draw;
 only the actual publish step is automated.
 

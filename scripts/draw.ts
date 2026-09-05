@@ -18,7 +18,7 @@ import { randomUUID } from 'node:crypto'
 import { fileURLToPath } from 'node:url'
 
 import { generateAssignments } from '../lib/assign.ts'
-import { loadPeople, loadHistory, flattenHistory } from '../lib/data.ts'
+import { loadPeople, loadHistory, loadEmails, flattenHistory } from '../lib/data.ts'
 import { generateRevealPages } from '../lib/site.ts'
 import { createEmailSender } from '../lib/email.ts'
 import type { HistoryEntry, Person } from '../lib/schema.ts'
@@ -27,6 +27,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, '..')
 const PEOPLE_PATH = path.join(ROOT, 'data/people.json')
 const HISTORY_PATH = path.join(ROOT, 'data/history.json')
+const EMAILS_PATH = path.join(ROOT, 'data/emails.json')
 const PHOTOS_DIR = path.join(ROOT, 'photos')
 const SITE_DIR = path.join(ROOT, 'site')
 
@@ -100,20 +101,27 @@ async function sendEmails(people: Person[], entries: HistoryEntry[]) {
     )
   }
 
+  const emails = await loadEmails(EMAILS_PATH)
+  const missing = people.filter((p) => !emails[p.id]).map((p) => p.id)
+  if (missing.length > 0) {
+    throw new Error(`data/emails.json is missing an entry for: ${missing.join(', ')}`)
+  }
+
   const sendRevealEmail = createEmailSender({ gmailUser, gmailAppPassword })
   const byId = new Map(people.map((p) => [p.id, p]))
   let sent = 0
 
   for (const entry of entries) {
     const giver = byId.get(entry.giverId)!
+    const giverEmail = emails[giver.id]!
     const revealUrl = `${siteBaseUrl}/reveal-${entry.revealToken}.html`
     await sendRevealEmail({
-      toEmail: giver.email,
+      toEmail: giverEmail,
       toName: giver.name,
       revealUrl,
     })
     sent++
-    console.log(`Emailed ${giver.name} <${giver.email}>`)
+    console.log(`Emailed ${giver.name} <${giverEmail}>`)
   }
 
   console.log(`Sent ${sent} emails.`)

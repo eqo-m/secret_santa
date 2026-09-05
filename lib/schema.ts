@@ -3,10 +3,13 @@
 
 import { z } from 'zod'
 
+// No `email` here on purpose — this file is committed to a public repo.
+// Emails live in data/emails.json instead, which is gitignored and only
+// ever read locally by scripts/draw.ts (never by the CI build that
+// publishes site/ — see lib/data.ts).
 export const PersonSchema = z.object({
   id: z.string().min(1),
   name: z.string().min(1),
-  email: z.string().email(),
   householdId: z.string().min(1),
   photoFile: z.string().min(1),
   wishlistUrl: z.string().url(),
@@ -22,6 +25,10 @@ export const PeopleFileSchema = z.array(PersonSchema).superRefine((people, ctx) 
     seen.add(p.id)
   }
 })
+
+// data/emails.json: person id -> email. Gitignored, local-only.
+export const EmailsFileSchema = z.record(z.string().min(1), z.string().email())
+export type EmailsFile = z.infer<typeof EmailsFileSchema>
 
 export const HistoryEntrySchema = z.object({
   giverId: z.string().min(1),

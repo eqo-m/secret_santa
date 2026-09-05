@@ -2,6 +2,10 @@ node_modules/
 dist/
 .env
 
+# Real email addresses — this repo is public. See data/emails.example.json
+# for the shape; copy it to data/emails.json and fill in real addresses.
+data/emails.json
+
 # Generated site output — rebuilt by `npm run draw` / `npm run build:site`,
 # never source of truth. Deployed to GitHub Pages by a CI workflow that
 # builds it fresh, so it must never be committed (filenames carry the

@@ -12,12 +12,17 @@ npm install
 cp .env.example .env   # then fill in GMAIL_USER, GMAIL_APP_PASSWORD, SITE_BASE_URL
 ```
 
-1. Edit `data/people.json` — one entry per person (name, email,
-   `householdId`, `wishlistUrl`, `photoFile`). The `photoFile` must match
-   a file you add under `photos/`.
-2. Add each person's photo to `photos/<photoFile>` (see
+1. Edit `data/people.json` — one entry per person (name, `householdId`,
+   `wishlistUrl`, `photoFile`). The `photoFile` must match a file you add
+   under `photos/`. **No email here** — this repo is public, and email
+   is the one thing we keep out of it (see step 2).
+2. Copy `data/emails.example.json` to `data/emails.json` and fill in
+   each person's real email, keyed by their `id`. This file is
+   gitignored — never committed, local-only, read only by `npm run
+   draw`'s email step (the GitHub Pages build never touches it).
+3. Add each person's photo to `photos/<photoFile>` (see
    `photos/README.md`).
-3. Fill in `.env`:
+4. Fill in `.env`:
    - `GMAIL_USER` — the Gmail address to send from
    - `GMAIL_APP_PASSWORD` — a 16-character app password (requires 2FA on
      the account), generated at https://myaccount.google.com/apppasswords
@@ -40,13 +45,11 @@ entry from `history.json` first.
 
 ## Deploying reveal pages (GitHub Pages)
 
-`site/` is gitignored — it's build output, not source of truth, and its
-filenames contain the unguessable reveal tokens, so we never want it
-sitting in the repo's git history (that repo is public; committing the
-tokens would make every reveal link discoverable by anyone browsing the
-repo). Instead, `.github/workflows/deploy-pages.yml` rebuilds `site/`
+`site/` is gitignored — it's pure build output, regenerable from `data/`
++ `photos/` at any time. `.github/workflows/deploy-pages.yml` rebuilds it
 straight from `data/people.json` + `data/history.json` and publishes it
-as a Pages *deployment artifact* — the HTML never touches git.
+as a Pages *deployment artifact*, so there's no need to commit generated
+HTML just to get it hosted.
 
 One-time setup:
 1. Push this repo to GitHub (keep it public — Pages on GitHub Free
@@ -73,8 +76,10 @@ npm run typecheck
 
 ```
 data/
-  people.json    # hand-edited: names, households, wishlist links, photo filenames
-  history.json   # append-only draw history, one entry per year
+  people.json         # hand-edited: names, households, wishlist links, photo filenames — committed
+  history.json        # append-only draw history, one entry per year — committed
+  emails.example.json # shape reference for emails.json — committed
+  emails.json         # id -> email — gitignored, local-only, never committed
 photos/          # one photo per person, committed to the repo
 lib/
   assign.ts      # assignment algorithm (no self / no household / no last-year-repeat)
