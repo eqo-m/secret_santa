@@ -2,89 +2,78 @@
   {
     "id": "alice",
     "name": "Alice",
-    "email": "alice@example.com",
     "householdId": "household-1",
-    "photoFile": "alice.jpg",
+    "photoFile": "A.jpg",
     "wishlistUrl": "https://example.com/wishlist/alice"
   },
   {
     "id": "bob",
     "name": "Bob",
-    "email": "bob@example.com",
     "householdId": "household-1",
-    "photoFile": "bob.jpg",
+    "photoFile": "A.jpg",
     "wishlistUrl": "https://example.com/wishlist/bob"
   },
   {
     "id": "carol",
     "name": "Carol",
-    "email": "carol@example.com",
     "householdId": "household-2",
-    "photoFile": "carol.jpg",
+    "photoFile": "A.jpg",
     "wishlistUrl": "https://example.com/wishlist/carol"
   },
   {
     "id": "dave",
     "name": "Dave",
-    "email": "dave@example.com",
     "householdId": "household-2",
-    "photoFile": "dave.jpg",
+    "photoFile": "A.jpg",
     "wishlistUrl": "https://example.com/wishlist/dave"
   },
   {
     "id": "erin",
     "name": "Erin",
-    "email": "erin@example.com",
     "householdId": "household-3",
-    "photoFile": "erin.jpg",
+    "photoFile": "A.jpg",
     "wishlistUrl": "https://example.com/wishlist/erin"
   },
   {
     "id": "frank",
     "name": "Frank",
-    "email": "frank@example.com",
     "householdId": "household-3",
-    "photoFile": "frank.jpg",
+    "photoFile": "A.jpg",
     "wishlistUrl": "https://example.com/wishlist/frank"
   },
   {
     "id": "grace",
     "name": "Grace",
-    "email": "grace@example.com",
     "householdId": "household-4",
-    "photoFile": "grace.jpg",
+    "photoFile": "A.jpg",
     "wishlistUrl": "https://example.com/wishlist/grace"
   },
   {
     "id": "heidi",
     "name": "Heidi",
-    "email": "heidi@example.com",
     "householdId": "household-4",
-    "photoFile": "heidi.jpg",
+    "photoFile": "A.jpg",
     "wishlistUrl": "https://example.com/wishlist/heidi"
   },
   {
     "id": "ivan",
     "name": "Ivan",
-    "email": "ivan@example.com",
     "householdId": "household-5",
-    "photoFile": "ivan.jpg",
+    "photoFile": "A.jpg",
     "wishlistUrl": "https://example.com/wishlist/ivan"
   },
   {
     "id": "judy",
     "name": "Judy",
-    "email": "judy@example.com",
     "householdId": "household-5",
-    "photoFile": "judy.jpg",
+    "photoFile": "A.jpg",
     "wishlistUrl": "https://example.com/wishlist/judy"
   },
   {
     "id": "mallory",
     "name": "Mallory",
-    "email": "mallory@example.com",
     "householdId": "household-5",
-    "photoFile": "mallory.jpg",
+    "photoFile": "A.jpg",
     "wishlistUrl": "https://example.com/wishlist/mallory"
   }
 ]
