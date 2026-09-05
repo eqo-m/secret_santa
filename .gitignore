@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.env
+
+# Generated static reveal pages — rebuilt by `npm run draw`, not source of truth.
+# Deploy the contents of site/ to static hosting as a separate manual step.
+site/*.html
