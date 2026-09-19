@@ -16,11 +16,11 @@ export function generateRevealHtml({
   // Keep this human-readable but minimal — no framework, no build step, this
   // literal string *is* the deployed artifact.
   return `<!doctype html>
-<html lang="en">
+<html lang="de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Secret Santa — ${escapeHtml(giverName)}</title>
+<title>Wichteln — ${escapeHtml(giverName)}</title>
 <style>
   :root {
     color-scheme: light dark;
@@ -111,13 +111,13 @@ export function generateRevealHtml({
 </head>
 <body>
   <div class="card">
-    <p class="eyebrow">Hi ${escapeHtml(giverName)}, you're buying for</p>
-    <h1>🎁 Secret Santa</h1>
+    <p class="eyebrow">Hallo ${escapeHtml(giverName)}, du bist der Wichtel von:</p>
+    <h1>🎁 </h1>
     <div class="photo-wrap">
       <img id="photo" src="${escapeHtml(receiverPhotoPath)}" alt="${escapeHtml(receiverName)}">
     </div>
     <p class="receiver-name">${escapeHtml(receiverName)}</p>
-    <a class="wishlist-link" href="${escapeHtml(receiverWishlistUrl)}" target="_blank" rel="noopener">View wishlist</a>
+    <a class="wishlist-link" href="${escapeHtml(receiverWishlistUrl)}" target="_blank" rel="noopener">Wunschzettel ansehen</a>
   </div>
   <script>
     // Blur-to-sharp on every visit, no localStorage / repeat-visit tracking —

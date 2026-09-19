@@ -1,79 +1,96 @@
 [
   {
-    "id": "alice",
-    "name": "Alice",
+    "id": "nadja",
+    "name": "Nadja",
     "householdId": "household-1",
-    "photoFile": "A.jpg",
-    "wishlistUrl": "https://example.com/wishlist/alice"
+    "photoFile": "Nadja.jpg",
+    "wishlistUrl": "http://www.wishsite.de/wishlist/8tii4xy2"
   },
   {
-    "id": "bob",
-    "name": "Bob",
+    "id": "frieda",
+    "name": "Frieda",
     "householdId": "household-1",
-    "photoFile": "A.jpg",
-    "wishlistUrl": "https://example.com/wishlist/bob"
+    "photoFile": "Frieda.jpg",
+    "wishlistUrl": "http://www.wishsite.de/wishlist/snorrisliste"
   },
   {
-    "id": "carol",
-    "name": "Carol",
+    "id": "elko",
+    "name": "Elko",
+    "householdId": "household-1",
+    "photoFile": "Elko.jpg",
+    "wishlistUrl": "http://www.wishsite.de/wishlist/otwsuro7"
+  },
+  {
+    "id": "manila",
+    "name": "Manila",
     "householdId": "household-2",
-    "photoFile": "A.jpg",
-    "wishlistUrl": "https://example.com/wishlist/carol"
+    "photoFile": "Manila.jpg",
+    "wishlistUrl": "http://www.wishsite.de/wishlist/mrfo3thg"
   },
   {
-    "id": "dave",
-    "name": "Dave",
+    "id": "ralf",
+    "name": "Ralf",
     "householdId": "household-2",
-    "photoFile": "A.jpg",
-    "wishlistUrl": "https://example.com/wishlist/dave"
+    "photoFile": "Ralf.jpg",
+    "wishlistUrl": "http://www.wishsite.de/wishlist/vs66hwdi"
   },
   {
-    "id": "erin",
-    "name": "Erin",
+    "id": "nora",
+    "name": "Nora",
     "householdId": "household-3",
-    "photoFile": "A.jpg",
-    "wishlistUrl": "https://example.com/wishlist/erin"
+    "photoFile": "Nora.jpg",
+    "wishlistUrl": "http://www.wishsite.de/wishlist/jt0sunfs"
   },
   {
-    "id": "frank",
-    "name": "Frank",
+    "id": "stefan",
+    "name": "Stefan",
     "householdId": "household-3",
-    "photoFile": "A.jpg",
-    "wishlistUrl": "https://example.com/wishlist/frank"
+    "photoFile": "Stefan.jpg",
+    "wishlistUrl": "http://www.wishsite.de/wishlist/3fd8voj2"
   },
   {
-    "id": "grace",
-    "name": "Grace",
+    "id": "kati",
+    "name": "Kati",
     "householdId": "household-4",
-    "photoFile": "A.jpg",
-    "wishlistUrl": "https://example.com/wishlist/grace"
+    "photoFile": "Kati.jpg",
+    "wishlistUrl": "https://www.wishsite.de/wishlist/huq14lbp"
   },
   {
-    "id": "heidi",
-    "name": "Heidi",
+    "id": "svea",
+    "name": "Svea",
     "householdId": "household-4",
-    "photoFile": "A.jpg",
-    "wishlistUrl": "https://example.com/wishlist/heidi"
+    "photoFile": "Svea.jpg",
+    "wishlistUrl": "http://www.wishsite.de/wishlist/4l6kr4dd"
   },
   {
-    "id": "ivan",
-    "name": "Ivan",
-    "householdId": "household-5",
-    "photoFile": "A.jpg",
-    "wishlistUrl": "https://example.com/wishlist/ivan"
+    "id": "axel",
+    "name": "Axel",
+    "householdId": "household-4",
+    "photoFile": "Axel.jpg",
+    "wishlistUrl": "http://www.wishsite.de/wishlist/ax401ecg"
   },
   {
-    "id": "judy",
-    "name": "Judy",
+    "id": "karl",
+    "name": "Karl",
     "householdId": "household-5",
-    "photoFile": "A.jpg",
-    "wishlistUrl": "https://example.com/wishlist/judy"
-  },
-  {
-    "id": "mallory",
-    "name": "Mallory",
-    "householdId": "household-5",
-    "photoFile": "A.jpg",
-    "wishlistUrl": "https://example.com/wishlist/mallory"
+    "photoFile": "Karl.jpg",
+    "wishlistUrl": "http://www.wishsite.de/wishlist/4ys2un5m"
   }
 ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

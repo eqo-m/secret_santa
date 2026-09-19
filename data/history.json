@@ -1,59 +1,15 @@
 {
-  "2026": [
-    {
-      "giverId": "carol",
-      "receiverId": "grace",
-      "revealToken": "0338bb04-ab74-492f-9f80-75340fc6eb8e"
-    },
-    {
-      "giverId": "grace",
-      "receiverId": "mallory",
-      "revealToken": "2ca37b50-d002-4d82-9506-588eee47b2bb"
-    },
-    {
-      "giverId": "heidi",
-      "receiverId": "frank",
-      "revealToken": "e1d45842-abc8-4790-931e-3ff3825de222"
-    },
-    {
-      "giverId": "judy",
-      "receiverId": "alice",
-      "revealToken": "008d5112-f7ad-433c-8282-77b6fb3c344e"
-    },
-    {
-      "giverId": "frank",
-      "receiverId": "carol",
-      "revealToken": "01d67615-d438-4e07-9b39-6dae8cce79c5"
-    },
-    {
-      "giverId": "mallory",
-      "receiverId": "heidi",
-      "revealToken": "be65b69a-10d6-4682-8000-20cdb2f4152c"
-    },
-    {
-      "giverId": "erin",
-      "receiverId": "judy",
-      "revealToken": "dc8f68cd-26e0-4496-8116-c229234cf26d"
-    },
-    {
-      "giverId": "bob",
-      "receiverId": "dave",
-      "revealToken": "e9bc9e6b-9acb-4c22-ba44-3be0c271237e"
-    },
-    {
-      "giverId": "ivan",
-      "receiverId": "erin",
-      "revealToken": "eb225adf-3ad1-4724-a729-59d631245863"
-    },
-    {
-      "giverId": "alice",
-      "receiverId": "ivan",
-      "revealToken": "e891de28-2039-4205-84d7-598c9848c8ec"
-    },
-    {
-      "giverId": "dave",
-      "receiverId": "bob",
-      "revealToken": "8e57ab3d-8529-4549-b8c6-e43d96a39eee"
-    }
+  "2025": [
+    { "giverId": "karl", "receiverId": "stefan", "revealToken": "74472ec4-0932-4bd7-83d5-3064318a04f4" },
+    { "giverId": "manila", "receiverId": "nadja", "revealToken": "50246fd7-523a-4b62-a180-d64c34956997" },
+    { "giverId": "ralf", "receiverId": "karl", "revealToken": "05883eb2-0023-42b8-ac4c-71afabf700f1" },
+    { "giverId": "kati", "receiverId": "ralf", "revealToken": "3a0c34f5-693f-4e46-8d7e-29f909bced43" },
+    { "giverId": "axel", "receiverId": "elko", "revealToken": "fa7a1e26-5ed5-4528-9ace-ca4129bda6f3" },
+    { "giverId": "nadja", "receiverId": "manila", "revealToken": "6a7a664a-7c6b-4dbd-bc20-a93c4bd768a9" },
+    { "giverId": "nora", "receiverId": "axel", "revealToken": "9616ad73-e690-4af0-a59c-f545f55bd003" },
+    { "giverId": "svea", "receiverId": "frieda", "revealToken": "ce325bab-e419-4ef2-ae1d-c4772ea6d98a" },
+    { "giverId": "elko", "receiverId": "kati", "revealToken": "8bc2cbc0-bf1d-4e83-8443-258f74250af5" },
+    { "giverId": "frieda", "receiverId": "nora", "revealToken": "866596b2-ddbb-44e6-8eba-85b87ea4f781" },
+    { "giverId": "stefan", "receiverId": "svea", "revealToken": "246023e1-f236-4694-93be-b2622f8e2033" }
   ]
 }

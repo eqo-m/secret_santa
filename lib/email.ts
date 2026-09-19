@@ -35,13 +35,13 @@ export function createEmailSender({
     await transporter.sendMail({
       from: gmailUser,
       to: toEmail,
-      subject: `Your Secret Santa assignment is ready, ${toName}!`,
+      subject: `Dein Wichtel steht fest, ${toName}!`,
       html: `
-        <p>Ho ho ho, ${escapeHtml(toName)} —</p>
-        <p><a href="${escapeHtml(revealUrl)}">Click here to see who you're buying for</a>.</p>
-        <p>Happy gifting!</p>
+        <p>Hallo ${escapeHtml(toName)} —</p>
+        <p><a href="${escapeHtml(revealUrl)}">Folge dem Link, um herauszufinden, wen du bewichteln darfst: </a>.</p>
+        <p>Viel Spaß beim Beschenken!</p>
       `,
-      text: `Ho ho ho, ${toName} — your Secret Santa assignment is ready: ${revealUrl}\n\nHappy gifting!`,
+      text: `Hallo ${toName} — folge dem Link, um herauszufinden, wen du bewichteln darfst: ${revealUrl}\n\nViel Spaß beim Beschenken!`,
     })
   }
 }
