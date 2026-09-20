@@ -55,5 +55,62 @@
       "receiverId": "svea",
       "revealToken": "246023e1-f236-4694-93be-b2622f8e2033"
     }
+  ],
+  "2026": [
+    {
+      "giverId": "nadja",
+      "receiverId": "nora",
+      "revealToken": "6916011b-a323-4536-9176-324a236dbc7b"
+    },
+    {
+      "giverId": "frieda",
+      "receiverId": "kati",
+      "revealToken": "117b28d6-a237-4bb3-a73f-879867275f14"
+    },
+    {
+      "giverId": "nora",
+      "receiverId": "manila",
+      "revealToken": "0bccb843-f854-4452-b584-4fb335bda5cc"
+    },
+    {
+      "giverId": "stefan",
+      "receiverId": "ralf",
+      "revealToken": "e98f687a-2729-423a-9cb4-f66078fee55b"
+    },
+    {
+      "giverId": "karl",
+      "receiverId": "axel",
+      "revealToken": "463ba95e-2f0a-4f19-9495-2371120846ca"
+    },
+    {
+      "giverId": "axel",
+      "receiverId": "frieda",
+      "revealToken": "68872d02-af2d-464e-b5e3-53ddf7f7fa36"
+    },
+    {
+      "giverId": "svea",
+      "receiverId": "nadja",
+      "revealToken": "faa89784-a924-4abd-af6d-fe12831f1a67"
+    },
+    {
+      "giverId": "manila",
+      "receiverId": "svea",
+      "revealToken": "6729909a-8ab5-45ad-8388-b329a6bd43ce"
+    },
+    {
+      "giverId": "ralf",
+      "receiverId": "stefan",
+      "revealToken": "b8206bff-4fd8-4748-9d13-47326ab6328f"
+    },
+    {
+      "giverId": "kati",
+      "receiverId": "elko",
+      "revealToken": "ae3a72a3-3fba-4c80-b1e8-b8f95c83c29a"
+    },
+    {
+      "giverId": "elko",
+      "receiverId": "karl",
+      "revealToken": "fecd0ac4-d095-4953-a94e-8879f6f5b397"
+    }
   ]
 }

@@ -38,10 +38,10 @@ export function createEmailSender({
       subject: `Dein Wichtel steht fest, ${toName}!`,
       html: `
         <p>Hallo ${escapeHtml(toName)} —</p>
-        <p><a href="${escapeHtml(revealUrl)}">Folge dem Link, um herauszufinden, wen du bewichteln darfst: </a>.</p>
+        <p><a href="${escapeHtml(revealUrl)}">Folge dem Link, um herauszufinden, wen du bewichteln darfst</a>.</p>
         <p>Viel Spaß beim Beschenken!</p>
       `,
-      text: `Hallo ${toName} — folge dem Link, um herauszufinden, wen du bewichteln darfst: ${revealUrl}\n\nViel Spaß beim Beschenken!`,
+      text: `Hallo ${toName} — folge dem Link, um herauszufinden, wen du bewichteln darfst ${revealUrl}\n\nViel Spaß beim Beschenken!`,
     })
   }
 }
